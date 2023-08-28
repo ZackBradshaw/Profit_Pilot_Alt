@@ -1,3 +1,4 @@
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // In this section, we set the user authentication, user and app ID, model details, and the URL
 // of the text we want as an input. Change these strings to run your own example.
@@ -7,12 +8,12 @@
 const PAT = '1624534249ce4484833f717b8de006fb';
 // Specify the correct user_id/app_id pairings
 // Since you're making inferences outside your app's scope
-const USER_ID = 'meta';    
-const APP_ID = 'Llama-2';
+const USER_ID = 'clarifai';    
+const APP_ID = 'ml';
 // Change these to whatever model and text URL you want to use
-const MODEL_ID = 'llama2-7b-chat';
-const MODEL_VERSION_ID = 'e52af5d6bc22445aa7a6761f327f7129';    
-const TEXT_FILE_URL = 'https://samples.clarifai.com/negative_sentence_12.txt';
+const MODEL_ID = 'llama2-7b-alternative-4k';
+const MODEL_VERSION_ID = '7489d261f81b408eb52f66d48a19b0be'; 
+const TEXT_FILE_URL = 'https://samples.clarifai.com/metro-north.jpg';
 
 ///////////////////////////////////////////////////////////////////////////////////
 // YOU DO NOT NEED TO CHANGE ANYTHING BELOW THIS LINE TO RUN THIS EXAMPLE
@@ -48,6 +49,10 @@ const requestOptions = {
 // this will default to the latest version_id
 
 fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/versions/" + MODEL_VERSION_ID + "/outputs", requestOptions)
-    .then(response => response.text())
-    .then(result => console.log(result))
-    .catch(error => console.log('error', error));
+    .then((response) => {
+        return response.json();
+    })
+    .then((data) => {
+        if(data.status.code != 10000) console.log(data.status);
+        else console.log(data['outputs'][0]['data']['text']['raw']);
+    }).catch(error => console.log('error', error));
