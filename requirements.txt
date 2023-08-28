@@ -1,5 +1,6 @@
 langchain
 transformers
+faiss
 faiss-gpu
 langchain-experimental==0.0.10
 torch
