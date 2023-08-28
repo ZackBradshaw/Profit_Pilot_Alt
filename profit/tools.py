@@ -23,17 +23,15 @@ from langchain.tools.file_management.read import ReadFileTool
 from langchain.tools.file_management.write import WriteFileTool
 from pydantic import Field
 
-# from profit.llama import LLama
+from profit.llama import LLama
 
-llm = ChatOpenAI(model_name="gpt-4", temperature=1.0)
+if llama:
 
-# if llama:
-
-#     self.llm = LLama()
-# else:
-#     self.llm = ChatOpenAI(model_name='gpt4', 
-#                         openai_api_key=self.openai_api_key, 
-#                         temperature=self.temperature)
+    self.llm = LLama()
+else:
+    self.llm = ChatOpenAI(model_name='gpt4', 
+                        openai_api_key=self.openai_api_key, 
+                        temperature=self.temperature)
 
 
 
